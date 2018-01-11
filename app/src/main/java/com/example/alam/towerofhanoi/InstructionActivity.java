@@ -2,6 +2,7 @@ package com.example.alam.towerofhanoi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,7 +35,7 @@ public class InstructionActivity extends Activity {
         steps = (TextView) findViewById(R.id.steps);
         LinearLayout ll =(LinearLayout) findViewById(R.id.main_layout);
 
-        drawingView = new Draw(this,1000,800,4);
+        drawingView = new Draw(this,dpToPixel(333),dpToPixel(266),4);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.FILL_PARENT);
         ll.addView(drawingView);
@@ -64,7 +65,7 @@ public class InstructionActivity extends Activity {
             paint.setColor(Color.BLACK);
             paint.setStyle(Paint.Style.STROKE);
             paint.setAntiAlias(true);
-            paint.setStrokeWidth(5);
+            paint.setStrokeWidth(dpToPixel(1));
             setBackgroundDrawable(new BitmapDrawable(BitmapFactory.decodeResource(getResources(), 1)));
             this.leftRod = new Stack();
             this.middleRod = new Stack();
@@ -82,18 +83,18 @@ public class InstructionActivity extends Activity {
         }
 
         public void onDraw(Canvas canvas) {
-            canvas.drawLine(200, 290, 700, 290, paint);
-            canvas.drawLine(200, 660, 700, 660, paint);
-            canvas.drawLine(200, 1040, 700, 1040, paint);
-            canvas.translate(this.xRatio * 220.0f, this.yRatio * 90.0f);
+            canvas.drawLine(dpToPixel(67), dpToPixel(97), dpToPixel(233), dpToPixel(97), paint);
+            canvas.drawLine(dpToPixel(67), dpToPixel(220), dpToPixel(233), dpToPixel(220), paint);
+            canvas.drawLine(dpToPixel(67), dpToPixel(347), dpToPixel(233), dpToPixel(347), paint);
+            canvas.translate(this.xRatio * 240.0f, this.yRatio * 150.0f);
             canvas.save();
             drawDisks(canvas, this.leftRod);
             canvas.restore();
-            canvas.translate(this.xRatio * 0.0f, this.yRatio * 150.0f);
+            canvas.translate(this.xRatio * 0.0f, this.yRatio * 210.0f);
             canvas.save();
             drawDisks(canvas, this.middleRod);
             canvas.restore();
-            canvas.translate(this.xRatio * 0.0f, this.yRatio * 150.0f);
+            canvas.translate(this.xRatio * 0.0f, this.yRatio * 210.0f);
             canvas.save();
             drawDisks(canvas, this.rightRod);
             canvas.restore();
@@ -215,7 +216,14 @@ public class InstructionActivity extends Activity {
             shape.draw(canvas, paint);
             canvas.restore();
         }
+
     }
+    public static int dpToPixel(int dp){
+        int pixel;
+        pixel = (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+        return pixel;
+    }
+
 //    public static final class C0034R {
 //
 //        public static final class attr {
